@@ -1,113 +1,113 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  // memakai statefulwidget karena widget ada perubahan
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+  _MyAppState createState() => _MyAppState();
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class _MyAppState extends State<MyApp> {
+  double _inputPanjang = 0; //membuat variable
+  double _inputLebar = 0; //membuat variable
+  double _tigapuluh = 0; //membuat variable
+  double _empatpuluh = 0; //membuat variable
+  double _limapuluh = 0; //membuat variable
+  final inputpjController = TextEditingController(); //membuat controller  
+  final inputlbController = TextEditingController(); //membuat controller
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+  var listItem = ["30X30", "40X40", "50X50"]; //variable pada list
+  List<String> listViewItem = List<String>(); //untuk list item
+  String _newValue = "30X30"; // variable value
+  double _result = 0; // variable result
 
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
+  void dropDownOnChanged(String changeValue) {
+    //fungsi untuk dropdown
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _newValue = changeValue;
+    });
+  }
+
+  void perhitunganRumus() {
+    //fungsi untuk mengitung rumus
+    setState(() {
+      _inputPanjang = double.parse(inputpjController.text);
+      _inputLebar = double.parse(inputlbController.text);
+      if (_newValue == "30X30") {
+        //perhitungan jika ukuran keramik 30x30
+        _result = ((_inputPanjang * 100) * (_inputLebar * 100)) / 900;
+      } else if (_newValue == "40X40") {
+        //perhitungan jika ukuran keramik 40x40
+        _result = ((_inputPanjang * 100) * (_inputLebar * 100)) / 1600;
+      } else //perhitungan jika ukuran keramik 50x50
+        _result = ((_inputPanjang * 100) * (_inputLebar * 100)) / 2500;
+      listViewItem.add(
+          "Ruangan Anda jika dipasang keramik ukuran $_newValue cm, maka membutuhkan keramik sebanyak : $_result biji");
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false, //menghilankan banner debug
+      title: 'Aplikasi Menghitung Ubin', //title aplikasi
+      theme: ThemeData(
+        primarySwatch: Colors.grey, // warna tema
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("HomeSweetHome"), //title tampilan kanan atas aplikasi
+        ),
+        body: Container(//container
+          padding: EdgeInsets.only( bottom:20.0),//mengatur jarak
+          margin: EdgeInsets.all(15),//mengatur jarak
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,//mengatur jarak
+            children: [
+              Image.network('https://4.bp.blogspot.com/-siKbotN6Ids/U3AyMMN60OI/AAAAAAAAAQ8/Coeenl_4BSw/s1600/rumah-bagus-murah.png'),//gambar dari internet
+              Container(//container
+                padding: EdgeInsets.all(11.0),//mengatur jarak
+                child: TextFormField(//membuat text form(kolom yang bisa diisi)
+                  controller: inputpjController,//memanggil controller
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],//validasi digit
+                  keyboardType: TextInputType.number,//tipe keyboard
+                  decoration: new InputDecoration(//dekorasi textformfield
+                      hintText: "Masukkan Panjang Ruangan",//text pada textformfield
+                      icon: Icon(Icons.home_outlined),//icon pada textformfield
+                      border: OutlineInputBorder(//border pada textformfield
+                      borderRadius: new BorderRadius.circular(5.0))),//border pada textformfield
+                ),
+              ),
+              
+              Container(//container
+                padding: EdgeInsets.all(11.0),//mengatur jarak
+                child: TextFormField(//membuat text form(kolom yang bisa diisi)
+                  controller: inputlbController,//memanggil controller
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],//validasi digit
+                  keyboardType: TextInputType.number,//tipe keyboard
+                  decoration: new InputDecoration(//dekorasi textformfield
+                      hintText: "Masukkan Lebar Ruangan",//text pada textformfield
+                      icon: Icon(Icons.home_outlined),//icon pada textformfield
+                      border: OutlineInputBorder(//border pada textformfield
+                      borderRadius: new BorderRadius.circular(5.0))),//border pada textformfield
+                ),
+              ),
+              
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.perm_media),
+          backgroundColor: Colors.blueGrey,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
