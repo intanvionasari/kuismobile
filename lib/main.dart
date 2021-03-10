@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quiz1/halamandua.dart';
 
+import 'widget/inputlebar.dart';
 import 'widget/inputpanjang.dart';
 
 void main() {
@@ -74,27 +75,7 @@ class _MyAppState extends State<MyApp> {
                   width: 200.0,//mengatur lebar gambar
                   height: 150.0),//mengatur tinggi gambar
               Inputpanjang(inputpjController: inputpjController),
-              Container(
-                //container
-                padding: EdgeInsets.all(5.0), //mengatur jarak
-                child: TextFormField(
-                  //membuat text form(kolom yang bisa diisi)
-                  controller: inputlbController, //memanggil controller
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly
-                  ], //validasi hanya digit
-                  keyboardType: TextInputType.number, //tipe keyboard
-                  decoration: new InputDecoration(
-                      //dekorasi textformfield
-                      hintText:
-                          "Masukkan Lebar Ruangan(meter)", //text pada textformfield
-                      icon: Icon(Icons.home_outlined), //icon pada textformfield
-                      border: OutlineInputBorder(
-                          //border pada textformfield
-                          borderRadius: new BorderRadius.circular(
-                              2.0))), //border pada textformfield
-                ),
-              ),
+              Inputlebar(inputlbController: inputlbController),
               Container(//container
                 padding: EdgeInsets.only(top: 23.0),//padding untuk mengatur jarak hanya atas saja
                 child: Text(//child yang berisi text
@@ -155,6 +136,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
 
 
 class Float extends StatelessWidget {
