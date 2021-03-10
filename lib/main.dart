@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quiz1/halamandua.dart';
 
+import 'widget/dropdown.dart';
 import 'widget/inputlebar.dart';
 import 'widget/inputpanjang.dart';
+import 'widget/textpertama.dart';
 
 void main() {
   runApp(MyApp());
@@ -76,26 +78,8 @@ class _MyAppState extends State<MyApp> {
                   height: 150.0),//mengatur tinggi gambar
               Inputpanjang(inputpjController: inputpjController),
               Inputlebar(inputlbController: inputlbController),
-              Container(//container
-                padding: EdgeInsets.only(top: 23.0),//padding untuk mengatur jarak hanya atas saja
-                child: Text(//child yang berisi text
-                  'Pilih Ukuran Ubin',//text
-                  textAlign: TextAlign.center,//agar text berada di tengah atau center
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),//style pada text
-                ),
-              ),
-              Container(//container
-                child: DropdownButton<String>(//child yang berisi berisi dropdown button
-                  items: listItem.map((String value) {//digunakan untuk pilihan list pada dropdown
-                    return DropdownMenuItem<String>(
-                      value: value,//mengatur value
-                      child: Text(value),//text pada dropdown yang berisi value 
-                    );
-                  }).toList(),//untuk listnya
-                  value: _newValue,//memperbarui value atau memilih value
-                  onChanged: dropDownOnChanged,//memanggil fungsi agar dapat mengganti atau memilih list
-                ),
-              ),
+              Textpertama(),
+              Dropdown(listItem: listItem, newValue: _newValue,dropDownOnChanged: dropDownOnChanged),
               Container(//container
                 margin: EdgeInsets.only(top: 20, bottom: 20),//mengatur jarak dengan margin atas dan bawah
                 child: Column(//child berisi kolom
