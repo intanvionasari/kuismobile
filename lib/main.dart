@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quiz1/halamandua.dart';
 
 void main() {
   runApp(MyApp());
@@ -52,6 +53,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //menghilankan banner debug
       title: 'Aplikasi Menghitung Ubin', //title aplikasi
+      
       theme: ThemeData(
         primarySwatch: Colors.grey, // warna tema
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -69,8 +71,8 @@ class _MyAppState extends State<MyApp> {
             children: [
               Image.network(//mengambil gambar secara online
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd1eki1ZC4-4f7wgcG480nrY9Vc1SYuJx-3g&usqp=CAU',
-                  width: 200.0,
-                  height: 150.0),
+                  width: 200.0,//mengatur lebar gambar
+                  height: 150.0),//mengatur tinggi gambar
               Container(
                 //container
                 padding: EdgeInsets.all(5.0), //mengatur jarak
@@ -154,26 +156,42 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
               ),
-              Container(
-                width: 150,
-                height: 50,
-                child: RaisedButton(
-                  onPressed: perhitunganRumus,
-                  child: Text("Hitung Ubin"),
-                  splashColor: Colors.white10,
-                  textColor: Colors.black,
-                  color: Colors.blueGrey,
+              Container(//container untuk button
+                width: 150,//mengatur lebar button
+                height: 50,//mengatur tinggi button
+                child: RaisedButton(//membuat raised button
+                  onPressed: perhitunganRumus,//memanggil fungsi perhitunganRumus jika diklik buttonnya
+                  child: Text("Hitung Ubin"),//text 
+                  splashColor: Colors.white10,//efek jika diklik ada warna putih
+                  textColor: Colors.black,//warna pada text button
+                  color: Colors.blueGrey,//warna buttonnya
                 ),
               )
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Icon(Icons.perm_media),
-          backgroundColor: Colors.blueGrey,
-        ),
+        floatingActionButton: Float(),//memanggil kelas Float
       ),
+    );
+  }
+}
+
+class Float extends StatelessWidget {
+  const Float({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(//membuat button tipe floating
+      onPressed: () {  Navigator.push(//jika di pencet atau diklik akan berpindah halaman
+        context,
+        MaterialPageRoute(builder: (context) => new haldua()//menyetting halaman yang dituju
+        ),
+      );
+      },
+      child: Icon(Icons.perm_media),//memberi ikon pada buttonnya
+      backgroundColor: Colors.blueGrey,//warna background untuk buttonnya
     );
   }
 }
