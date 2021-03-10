@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quiz1/halamandua.dart';
 
+import 'widget/inputpanjang.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -43,9 +45,7 @@ class _MyAppState extends State<MyApp> {
         _result = ((_inputPanjang * 100) * (_inputLebar * 100)) / 1600;
       } else //perhitungan jika ukuran keramik 50x50
         _result = ((_inputPanjang * 100) * (_inputLebar * 100)) / 2500;
-      listViewItem.add(
-          "Ruangan Anda jika dipasang keramik ukuran $_newValue cm, maka membutuhkan keramik sebanyak : $_result biji");
-    });
+     });
   }
 
   @override
@@ -73,27 +73,7 @@ class _MyAppState extends State<MyApp> {
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd1eki1ZC4-4f7wgcG480nrY9Vc1SYuJx-3g&usqp=CAU',
                   width: 200.0,//mengatur lebar gambar
                   height: 150.0),//mengatur tinggi gambar
-              Container(
-                //container
-                padding: EdgeInsets.all(5.0), //mengatur jarak
-                child: TextFormField(
-                  //membuat text form(kolom yang bisa diisi)
-                  controller: inputpjController, //memanggil controller
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly
-                  ], //validasi hanya digit
-                  keyboardType: TextInputType.number, //tipe keyboard
-                  decoration: new InputDecoration(
-                      //dekorasi textformfield
-                      hintText:
-                          "Masukkan Panjang Ruangan(meter)", //text pada textformfield
-                      icon: Icon(Icons.home_outlined), //icon pada textformfield
-                      border: OutlineInputBorder(
-                          //border pada textformfield
-                          borderRadius: new BorderRadius.circular(
-                              2.0))), //border pada textformfield
-                ),
-              ),
+              Inputpanjang(inputpjController: inputpjController),
               Container(
                 //container
                 padding: EdgeInsets.all(5.0), //mengatur jarak
@@ -175,6 +155,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
 
 class Float extends StatelessWidget {
   const Float({
