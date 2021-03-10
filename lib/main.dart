@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:quiz1/halamandua.dart';
+import 'package:flutter/material.dart';//mengimport material pada flutter
+import 'package:flutter/services.dart';//mengimport service pada flutter
+import 'widget/dropdown.dart';//mengimport class dropdown
+import 'widget/floatingbtn.dart';//mengimport class floatingbtn
+import 'widget/hasil.dart';//mengimport class hasil
+import 'widget/inputlebar.dart';//mengimport class inputlebar
+import 'widget/inputpanjang.dart';//mengimport class inputpanjang
+import 'widget/raisedbtn.dart';////mengimport class raisedbtn
+import 'widget/textpertama.dart';////mengimport class textpertama
 
-import 'widget/dropdown.dart';
-import 'widget/inputlebar.dart';
-import 'widget/inputpanjang.dart';
-import 'widget/textpertama.dart';
-
-void main() {
+void main() {//fungsi agar project dapat di run
   runApp(MyApp());
 }
 
@@ -56,7 +57,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //menghilankan banner debug
       title: 'Aplikasi Menghitung Ubin', //title aplikasi
-      
       theme: ThemeData(
         primarySwatch: Colors.grey, // warna tema
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -76,46 +76,16 @@ class _MyAppState extends State<MyApp> {
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd1eki1ZC4-4f7wgcG480nrY9Vc1SYuJx-3g&usqp=CAU',
                   width: 200.0,//mengatur lebar gambar
                   height: 150.0),//mengatur tinggi gambar
-              Inputpanjang(inputpjController: inputpjController),
-              Inputlebar(inputlbController: inputlbController),
-              Textpertama(),
-              Dropdown(listItem: listItem, newValue: _newValue,dropDownOnChanged: dropDownOnChanged),
-              Container(//container
-                margin: EdgeInsets.only(top: 20, bottom: 20),//mengatur jarak dengan margin atas dan bawah
-                child: Column(//child berisi kolom
-                  mainAxisAlignment: MainAxisAlignment.center,//mainAxis untuk mengatur jarak kebawah
-                  children: [
-                    Text(
-                      "Anda Membutuhkan Ubin Sebanyak",//text
-                      style: TextStyle(//untuk textstyle seperti bold dan ukuran font
-                          fontWeight: FontWeight.bold, fontSize: 15.0),
-                    ),
-                    Text(
-                      _result.toStringAsFixed(1),//menampilkan result yang sudah diproses hitung
-                      style: TextStyle(fontSize: 30),//style text untuk result
-                    ),
-                    Text(
-                      "Biji",//text
-                      style: TextStyle(fontSize: 20.0),//style text
-                    ),
-                  ],
-                ),
-              ),
-              Container(//container untuk button
-                width: 150,//mengatur lebar button
-                height: 50,//mengatur tinggi button
-                child: RaisedButton(//membuat raised button
-                  onPressed: perhitunganRumus,//memanggil fungsi perhitunganRumus jika diklik buttonnya
-                  child: Text("Hitung Ubin"),//text 
-                  splashColor: Colors.white10,//efek jika diklik ada warna putih
-                  textColor: Colors.black,//warna pada text button
-                  color: Colors.blueGrey,//warna buttonnya
-                ),
-              )
+              Inputpanjang(inputpjController: inputpjController),//memanggil kelas Inputpanjang serta controllernya
+              Inputlebar(inputlbController: inputlbController),//memanggil kelas Inputlebar serta controllernya
+              Textpertama(),//memanggil kelas textpertama
+              Dropdown(listItem: listItem, newValue: _newValue,dropDownOnChanged: dropDownOnChanged),//memanggil kelas dropdown dan fungsinya
+              Hasil(result: _result),//memanggil kelas hasil 
+              Raisedbtn(perhitunganRumus: perhitunganRumus,),//memanggil kelas raisedbtn beserta fungsi perhitugan rumus
             ],
           ),
         ),
-        floatingActionButton: Float(),//memanggil kelas Float
+        floatingActionButton: Float(),//memanggil kelas Float yang berisi berpindah ke halaman selanjutnya
       ),
     );
   }
@@ -123,22 +93,3 @@ class _MyAppState extends State<MyApp> {
 
 
 
-class Float extends StatelessWidget {
-  const Float({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(//membuat button tipe floating
-      onPressed: () {  Navigator.push(//jika di pencet atau diklik akan berpindah halaman
-        context,
-        MaterialPageRoute(builder: (context) => new haldua()//menyetting halaman yang dituju
-        ),
-      );
-      },
-      child: Icon(Icons.perm_media),//memberi ikon pada buttonnya
-      backgroundColor: Colors.blueGrey,//warna background untuk buttonnya
-    );
-  }
-}
